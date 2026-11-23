@@ -1,1 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enzo Frejus | Portfolio GEII</title>
+  <style>
+    :root {
+      --texte: #13283d;
+      --secondaire: #476176;
+      --accent: #075d64;
+      --fond: #f1f7f6;
+      --bordure: #d5e2e5;
+    }
 
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--texte);
+      background: var(--fond);
+      font: 16px/1.65 system-ui, sans-serif;
+    }
+
+    a { color: var(--accent); }
+    :focus-visible { outline: 3px solid #00747c; outline-offset: 4px; }
+
+    .conteneur {
+      width: min(1100px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    .barre, nav, .actions, .etiquettes {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 18px;
+    }
+
+    .barre {
+      justify-content: space-between;
+      padding-block: 16px;
+    }
+
+    .nom {
+      color: var(--texte);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    nav a {
+      font-size: .9rem;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    .bouton {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .bouton.secondaire {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .bouton:hover { box-shadow: 0 0 0 2px var(--bordure); }
+
+    .accueil {
+      padding-block: clamp(64px, 11vw, 140px);
+      background: linear-gradient(120deg, #eef8f6, #e0eeef);
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    .presentation {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .portrait {
+      display: grid;
+      place-items: center;
+      justify-self: center;
+      width: min(100%, 240px);
+      aspect-ratio: 1;
+      border-radius: 24px;
+      background: var(--texte);
+      color: #dbf5ee;
+      box-shadow: 12px 12px 0 #a6d3ce;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 800;
+      object-fit: cover;
+    }
+
+    h1, h2, h3 { margin: 0 0 14px; line-height: 1.15; }
+    h1 { font-size: clamp(2.8rem, 8vw, 6rem); letter-spacing: -.06em; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+    h3 { font-size: 1.2rem; }
+    p { margin: 0 0 16px; color: var(--secondaire); }
+    .formation { color: var(--accent); font-weight: 750; }
+
+    main > .conteneur > section {
+      padding-block: 44px;
+      border-bottom: 1px solid var(--bordure);
+    }
+
+    .grille {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .logiciels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .carte {
+      padding: 22px;
+      border: 1px solid var(--bordure);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .carte ul { margin: 0; padding-left: 20px; }
+    .carte li + li { margin-top: 8px; }
+
+    .carte .etiquettes {
+      padding: 0;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .etiquettes li {
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--accent);
+      background: #e6f4f1;
+    }
+
+    .etiquettes li + li { margin-top: 0; }
+
+    .parcours { padding-left: 18px; border-left: 3px solid #75a9a7; }
+    footer { padding-block: 18px; color: var(--secondaire); }
+
+    @media (max-width: 760px) {
+      nav { order: 3; width: 100%; }
+      .presentation, .logiciels { grid-template-columns: 1fr; }
+      .portrait { grid-row: 1; justify-self: start; width: 130px; }
+    }
+
+    @media (max-width: 540px) {
+      .grille { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="conteneur barre">
+      <a class="nom" href="#accueil">Enzo Frejus</a>
+      <nav aria-label="Navigation principale">
+        <a href="#accueil"><span lang="fr">Accueil</span><span lang="en" hidden>Home</span></a>
+        <a href="#profil"><span lang="fr">À propos</span><span lang="en" hidden>About</span></a>
+        <a href="#parcours"><span lang="fr">Parcours</span><span lang="en" hidden>Education</span></a>
+        <a href="#projets"><span lang="fr">Projets</span><span lang="en" hidden>Projects</span></a>
+        <a href="#competences"><span lang="fr">Compétences</span><span lang="en" hidden>Skills</span></a>
+        <a href="#galerie"><span lang="fr">Galerie</span><span lang="en" hidden>Gallery</span></a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button id="langue" class="bouton secondaire" type="button" lang="en">English</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil" class="accueil">
+      <div class="conteneur presentation">
+        <div>
+          <p class="formation">
+            <span lang="fr">Étudiant en BUT GEII · IUT de Bordeaux</span>
+            <span lang="en" hidden>Electrical Engineering and Industrial Computing student · IUT de Bordeaux</span>
+          </p>
+          <h1>Enzo Frejus</h1>
+          <p>
+            <span lang="fr">Je m’intéresse à l’électronique, à la programmation et aux automatismes. Je présente ici les projets réalisés pendant ma formation.</span>
+            <span lang="en" hidden>I’m interested in electronics, programming and automation. Here are the projects I’ve worked on during my studies.</span>
+          </p>
+          <div class="actions">
+            <a class="bouton" href="#projets">
+              <span lang="fr">Voir mes projets</span><span lang="en" hidden>View my projects</span>
+            </a>
+            <a class="bouton secondaire" href="#contact">
+              <span lang="fr">Me contacter</span><span lang="en" hidden>Contact me</span>
+            </a>
+          </div>
+        </div>
+        <!-- Pour ajouter ta photo, remplace le bloc EF par :
+        <img class="portrait" src="photo-enzo.jpg" alt="Enzo Frejus">
+        -->
+        <div class="portrait" aria-hidden="true">EF</div>
+      </div>
+    </section>
+
+    <div class="conteneur">
+      <section id="profil">
+        <h2><span lang="fr">À propos</span><span lang="en" hidden>About me</span></h2>
+        <p>
+          <span lang="fr">Je suis en première année de BUT Génie électrique et informatique industrielle à l’IUT de Bordeaux, sur le campus de Gradignan. J’apprends à concevoir des circuits, à vérifier leur fonctionnement et à coordonner le travail en équipe.</span>
+          <span lang="en" hidden>I’m a first-year Electrical Engineering and Industrial Computing student at IUT de Bordeaux’s Gradignan campus. I’m learning to design circuits, verify their operation and coordinate teamwork.</span>
+        </p>
+      </section>
+
+      <section id="parcours">
+        <h2><span lang="fr">Mon parcours</span><span lang="en" hidden>My education</span></h2>
+        <div class="parcours">
+          <h3>
+            <span lang="fr">Aujourd’hui · BUT GEII</span>
+            <span lang="en" hidden>Current · Electrical Engineering and Industrial Computing</span>
+          </h3>
+          <p>
+            <span lang="fr">Première année à l’IUT de Bordeaux. Électronique, automatisme et programmation.</span>
+            <span lang="en" hidden>First year at IUT de Bordeaux. Electronics, automation and programming.</span>
+          </p>
+          <!-- Parcours provisoire à personnaliser dans les deux langues. -->
+          <h3>
+            <span lang="fr">Avant le BUT · Baccalauréat général</span>
+            <span lang="en" hidden>Before university · General baccalaureate</span>
+          </h3>
+          <p>
+            <span lang="fr">Exemple à modifier · Spécialités mathématiques et physique-chimie.</span>
+            <span lang="en" hidden>Example to edit · Specializations in mathematics, physics and chemistry.</span>
+          </p>
+        </div>
+      </section>
+
+      <section id="projets">
+        <h2><span lang="fr">Mes projets</span><span lang="en" hidden>My projects</span></h2>
+        <div class="grille">
+          <article class="carte">
+            <h3>Rafale</h3>
+            <p>
+              <span lang="fr">Projet d’équipe autour du Rafale.</span>
+              <span lang="en" hidden>Team project about the Rafale.</span>
+            </p>
+            <!-- Adapte les missions ci-dessous à ce que tu as fait dans ce projet. -->
+            <ul>
+              <li>
+                <span lang="fr"><strong>Rôle dans l’équipe · Manager.</strong> Répartition des tâches, coordination du groupe et suivi de l’avancement.</span>
+                <span lang="en" hidden><strong>Team role · Manager.</strong> Assigned tasks, coordinated the group and tracked progress.</span>
+              </li>
+              <li>
+                <span lang="fr"><strong>Concevoir.</strong> Participer à la définition du besoin et au choix des solutions techniques.</span>
+                <span lang="en" hidden><strong>Design.</strong> Help define requirements and choose technical solutions.</span>
+              </li>
+              <li>
+                <span lang="fr"><strong>Vérifier.</strong> Contrôler la cohérence de la solution avec les exigences du projet.</span>
+                <span lang="en" hidden><strong>Verify.</strong> Check that the solution meets the project requirements.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="carte">
+            <h3><span lang="fr">Thermomètre de bain</span><span lang="en" hidden>Bath thermometer</span></h3>
+            <p>
+              <span lang="fr">Conception d’un circuit qui indique la plage de température de l’eau à l’aide de LED.</span>
+              <span lang="en" hidden>Design of a circuit that uses LEDs to indicate the water temperature range.</span>
+            </p>
+            <ul>
+              <li>
+                <span lang="fr"><strong>Rôle dans l’équipe · Manager.</strong> Organisation du travail, coordination des membres et suivi du dossier.</span>
+                <span lang="en" hidden><strong>Team role · Manager.</strong> Organized tasks, coordinated team members and tracked progress on the report.</span>
+              </li>
+              <li>
+                <span lang="fr"><strong>Concevoir.</strong> Dimensionner les ponts diviseurs, définir les seuils des comparateurs et calculer les résistances des LED.</span>
+                <span lang="en" hidden><strong>Design.</strong> Size voltage dividers, set comparator thresholds and calculate LED resistor values.</span>
+              </li>
+              <li>
+                <span lang="fr"><strong>Vérifier.</strong> Contrôler les tensions de seuil et le fonctionnement des LED par rapport au cahier des charges.</span>
+                <span lang="en" hidden><strong>Verify.</strong> Check threshold voltages and LED operation against the specifications.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="carte">
+            <h3><span lang="fr">AOP</span><span lang="en" hidden>Operational amplifiers</span></h3>
+            <p>
+              <span lang="fr">Étude de montages à amplificateur opérationnel.</span>
+              <span lang="en" hidden>Study of operational amplifier circuits.</span>
+            </p>
+            <ul>
+              <li>
+                <span lang="fr">Analyser le fonctionnement d’un suiveur et d’un comparateur.</span>
+                <span lang="en" hidden>Analyze how a voltage follower and a comparator operate.</span>
+              </li>
+              <li>
+                <span lang="fr">Comparer les tensions calculées avec les résultats de simulation ou de mesure.</span>
+                <span lang="en" hidden>Compare calculated voltages with simulation or measurement results.</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="carte">
+            <h3><span lang="fr">Entrepreneuriat</span><span lang="en" hidden>Entrepreneurship</span></h3>
+            <p>
+              <span lang="fr">Étude d’une machine qui produit de l’électricité grâce au pédalage.</span>
+              <span lang="en" hidden>Business project for a machine that generates electricity through pedaling.</span>
+            </p>
+            <ul>
+              <li>
+                <span lang="fr">Présenter la chaîne d’énergie, du pédalier à la batterie LiFePO₄ équipée d’un BMS.</span>
+                <span lang="en" hidden>Present the energy conversion chain, from the pedals to the LiFePO₄ battery with a BMS.</span>
+              </li>
+              <li>
+                <span lang="fr">Identifier les clients et partenaires potentiels et réfléchir à la présentation du produit.</span>
+                <span lang="en" hidden>Identify potential customers and partners and plan how to present the product.</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="competences">
+        <h2><span lang="fr">Compétences et logiciels</span><span lang="en" hidden>Skills and software</span></h2>
+        <div class="grille logiciels">
+          <article class="carte">
+            <h3><span lang="fr">Électronique et schémas</span><span lang="en" hidden>Electronics and schematics</span></h3>
+            <ul class="etiquettes">
+              <li>Proteus</li><li>ISIS</li><li>ARES</li><li>WinRelais</li>
+            </ul>
+          </article>
+          <article class="carte">
+            <h3><span lang="fr">Automatisme et programmation</span><span lang="en" hidden>Automation and programming</span></h3>
+            <ul class="etiquettes">
+              <li>TIA Portal</li><li>Arduino</li>
+            </ul>
+          </article>
+          <article class="carte">
+            <h3><span lang="fr">Calcul et présentation</span><span lang="en" hidden>Calculations and presentation</span></h3>
+            <ul class="etiquettes">
+              <li>Maple</li><li>Excel</li><li>Canva</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="galerie">
+        <h2><span lang="fr">Galerie</span><span lang="en" hidden>Gallery</span></h2>
+        <!-- Ajoute ici tes photos de montages, captures de simulation et schémas. -->
+        <p>
+          <span lang="fr">Les photos de mes montages et les schémas de mes projets seront ajoutés ici.</span>
+          <span lang="en" hidden>Photos of my circuits and project schematics will be added here.</span>
+        </p>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <!-- Remplace l’adresse d’exemple dans href et dans le texte du lien. -->
+        <p><a href="mailto:enzo.frejus@example.com">enzo.frejus@example.com</a></p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="conteneur">Enzo Frejus · Portfolio GEII</footer>
+
+  <script>
+    const boutonLangue = document.querySelector("#langue");
+    const textes = document.querySelectorAll("span[lang]");
+    const navigation = document.querySelector("nav");
+
+    boutonLangue.addEventListener("click", () => {
+      const langue = boutonLangue.lang;
+      document.documentElement.lang = langue;
+
+      for (const texte of textes) {
+        texte.hidden = texte.lang !== langue;
+      }
+
+      const anglais = langue === "en";
+      boutonLangue.lang = anglais ? "fr" : "en";
+      boutonLangue.textContent = anglais ? "Français" : "English";
+      navigation.setAttribute("aria-label", anglais ? "Main navigation" : "Navigation principale");
+    });
+  </script>
+</body>
+</html>
