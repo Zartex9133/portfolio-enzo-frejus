@@ -1,80 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Enzo Frejus | Portfolio GEII</title>
+  <title>Accueil | Enzo Frejus</title>
 
   <style>
+    /* Couleurs communes aux cinq pages */
     :root {
       color-scheme: dark;
       --fond: #0b151f;
+      --surface: #142734;
       --texte: #f1f6fa;
       --secondaire: #b3c4d1;
-      --accent: #73eddb;
+      --cyan: #73eddb;
       --ligne: #2b4050;
     }
 
     * { box-sizing: border-box; }
     [hidden] { display: none !important; }
-    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       background: var(--fond);
       color: var(--texte);
       font: 16px/1.65 "Instrument Sans", system-ui, sans-serif;
     }
 
-    .wrap {
+    main { flex: 1; }
+
+    .conteneur {
       width: min(1100px, calc(100% - 40px));
       margin-inline: auto;
     }
 
-    a { color: var(--accent); }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    h1, h2 {
+      margin: 0 0 16px;
+      line-height: 1.12;
+      letter-spacing: -.04em;
+    }
 
-    h1, h2, h3 { line-height: 1.15; margin: 0 0 14px; }
-    h1 { font-size: clamp(3rem, 8vw, 6.5rem); letter-spacing: -.065em; }
-    h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.035em; }
-    h3 { font-size: 1.2rem; }
-    p { color: var(--secondaire); margin: 0 0 16px; }
+    h1 { font-size: clamp(2.6rem, 6vw, 5rem); }
+    h2 { font-size: clamp(1.35rem, 3vw, 1.8rem); }
+    p { margin: 0 0 16px; color: var(--secondaire); }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 5px; }
 
-    /* Navigation */
-    header { background: #0c1824; border-bottom: 1px solid var(--ligne); }
+    /* Menu visible sur toutes les pages */
+    header {
+      background: #0c1824;
+      border-bottom: 1px solid var(--ligne);
+    }
 
-    .bar {
+    .barre {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px 24px;
+      gap: 14px 24px;
       padding-block: 16px;
     }
 
-    .brand {
-      color: var(--texte);
-      text-decoration: none;
-      font-weight: 800;
+    .marque {
       font-size: 1.2rem;
-      letter-spacing: -.035em;
-    }
-
-    nav { display: flex; flex-wrap: wrap; gap: 8px 18px; }
-    nav a {
-      color: var(--secondaire);
+      font-weight: 800;
+      letter-spacing: -.04em;
       text-decoration: none;
-      font-size: .9rem;
-      font-weight: 650;
     }
-    nav a:hover { color: var(--accent); text-decoration: underline; }
 
-    .button {
+    nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+
+    nav a {
+      padding-block: 4px;
+      border-bottom: 2px solid transparent;
+      color: var(--secondaire);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover { color: var(--texte); }
+    nav a[aria-current="page"] { color: var(--cyan); border-color: var(--cyan); }
+
+    .bouton {
       display: inline-block;
-      border: 1px solid var(--accent);
-      border-radius: 5px;
-      padding: 10px 16px;
-      background: var(--accent);
+      padding: 10px 17px;
+      border: 1px solid var(--cyan);
+      border-radius: 6px;
+      background: var(--cyan);
       color: #09222a;
       font: inherit;
       font-weight: 700;
@@ -82,361 +97,469 @@
       cursor: pointer;
     }
 
-    .button.secondary { background: transparent; color: var(--accent); }
-    .button:hover { box-shadow: 0 0 0 2px var(--ligne); }
+    .secondaire { background: transparent; color: var(--cyan); }
+    .bouton:hover { box-shadow: 0 0 0 3px #73eddb22; }
 
     /* Accueil */
-    .hero {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding-block: clamp(70px, 12vw, 145px);
-      border-bottom: 1px solid var(--ligne);
-      background: radial-gradient(ellipse at 75% 45%, #123947, transparent 52%), #0c1926;
+    .accueil {
+      display: grid;
+      align-items: center;
+      min-height: 72vh;
+      padding-block: clamp(64px, 10vw, 130px);
+      background:
+        linear-gradient(#81dacc0b 1px, transparent 1px) 0 0 / 38px 38px,
+        linear-gradient(90deg, #81dacc0b 1px, transparent 1px) 0 0 / 38px 38px,
+        radial-gradient(ellipse at 78% 45%, #173e49, transparent 54%),
+        #0c1926;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background-image:
-        linear-gradient(#81dacc0c 1px, transparent 1px),
-        linear-gradient(90deg, #81dacc0c 1px, transparent 1px);
-      background-size: 38px 38px;
-    }
-
-    .hero-grid {
+    .presentation {
       display: grid;
       grid-template-columns: 1.5fr 1fr;
-      gap: 32px;
+      gap: 40px;
       align-items: center;
     }
 
-    .hero p { max-width: 58ch; }
+    .accueil h1 { font-size: clamp(3.5rem, 8vw, 7rem); letter-spacing: -.07em; }
+    .accueil p { max-width: 55ch; }
 
-    .intro {
-      color: var(--accent);
-      font: 700 .84rem/1.6 ui-monospace, monospace;
-      letter-spacing: .035em;
+    .formation {
+      color: var(--cyan);
+      font: 600 .9rem/1.6 ui-monospace, monospace;
     }
 
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
 
-    .avatar {
+    .monogramme {
       position: relative;
       display: grid;
       place-items: center;
       justify-self: center;
-      width: min(72%, 245px);
+      width: min(75%, 240px);
       aspect-ratio: 1;
       border: 1px solid #659b9b;
       border-radius: 50%;
       background: radial-gradient(circle at 28% 18%, #295b68, #102733 68%);
       color: #b4fff1;
-      font: italic 650 clamp(3rem, 7vw, 6rem)/1 system-ui;
+      font: italic 700 clamp(3rem, 7vw, 6rem)/1 system-ui;
       letter-spacing: -.09em;
-      box-shadow: 0 0 0 12px #10222d, 0 0 0 13px #436673, 0 0 70px #58dbcd20;
+      box-shadow: 0 0 0 12px #10222d, 0 0 0 13px #436673;
     }
 
-    .avatar::after {
+    .monogramme::after {
       content: "";
       position: absolute;
       inset: -25px;
-      border: 2px dashed #63939366;
+      border: 2px dashed #63939388;
       border-radius: 50%;
-      transform: rotate(-14deg) scaleY(.67);
+      transform: rotate(-16deg) scaleY(.68);
     }
 
-    /* Rubriques et cartes de projet */
-    .section {
-      padding-block: clamp(36px, 6vw, 68px);
-      border-bottom: 1px solid var(--ligne);
+    /* À propos, Parcours, Projets et Compétences */
+    .rubrique { padding-block: clamp(45px, 7vw, 90px); }
+    .rubrique > h1 { margin-bottom: 30px; }
+    .lecture { max-width: 68ch; font-size: 1.1rem; }
+
+    .grille {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
     }
 
-    .section > p { max-width: 72ch; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-    .tools { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .outils { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-    .card {
-      background: linear-gradient(125deg, #142734, #10202d);
-      border: 1px solid var(--ligne);
-      border-radius: 8px;
-      padding: clamp(18px, 3vw, 32px);
-    }
-
-    #projets .card {
+    .carte {
       display: flex;
       flex-direction: column;
+      padding: clamp(20px, 3vw, 32px);
+      border: 1px solid var(--ligne);
       border-top: 2px solid #417b80;
+      border-radius: 8px;
+      background: linear-gradient(125deg, var(--surface), #10202d);
     }
 
-    #projets h3 { font-size: 1.5rem; }
-    details { margin-top: auto; border-top: 1px solid var(--ligne); padding-top: 12px; }
-    summary { color: var(--accent); cursor: pointer; font: .87rem/1.6 ui-monospace, monospace; }
-    details ul { padding-left: 20px; margin: 16px 0 0; color: var(--secondaire); }
+    details {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--ligne);
+    }
+
+    summary {
+      color: var(--cyan);
+      font: .9rem/1.6 ui-monospace, monospace;
+      cursor: pointer;
+    }
+
+    details ul { padding-left: 20px; color: var(--secondaire); }
     details li + li { margin-top: 8px; }
 
-    .timeline { padding-left: 18px; border-left: 3px solid #75a9a7; }
-    .timeline p:last-child { margin-bottom: 0; }
+    .chronologie {
+      max-width: 65ch;
+      padding-left: 22px;
+      border-left: 2px solid var(--cyan);
+    }
 
-    .tags {
+    .chronologie article + article { margin-top: 32px; }
+
+    .etiquettes {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 7px;
       list-style: none;
-      padding: 0;
       margin: 0;
+      padding: 0;
     }
 
-    .tags li {
+    .etiquettes li {
+      padding: 3px 9px;
       border-radius: 5px;
-      padding: 3px 8px;
       background: #1d3542;
-      color: var(--accent);
-      font: .82rem/1.6 ui-monospace, monospace;
+      color: var(--cyan);
+      font: .85rem/1.65 ui-monospace, monospace;
     }
 
-    footer { padding-block: 20px; color: var(--secondaire); }
+    footer {
+      border-top: 1px solid var(--ligne);
+      padding-block: 20px;
+      color: var(--secondaire);
+      font-size: .9rem;
+    }
 
-    /* Téléphones et tablettes */
     @media (max-width: 760px) {
       nav { order: 3; width: 100%; }
-      .hero { padding-block: 54px; }
-      .hero-grid, .tools { grid-template-columns: 1fr; }
-      .hero-grid { gap: 20px; }
-      .avatar { grid-row: 1; justify-self: start; width: 95px; margin: 20px; }
+      .presentation, .outils { grid-template-columns: 1fr; }
+      .monogramme {
+        grid-row: 1;
+        justify-self: start;
+        width: 95px;
+        margin: 15px 20px;
+      }
     }
 
-    @media (max-width: 540px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
+    @media (max-width: 580px) {
+      .grille { grid-template-columns: 1fr; }
+      nav { gap: 6px 14px; font-size: .9rem; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <div class="wrap bar">
-      <a class="brand" href="#accueil">Enzo Frejus</a>
+    <div class="conteneur barre">
+      <a class="marque" href="#accueil">Enzo Frejus</a>
 
       <nav aria-label="Navigation principale">
-        <a href="#accueil" data-en="Home">Accueil</a>
-        <a href="#profil" data-en="About">À propos</a>
+        <a href="#accueil" aria-current="page" data-en="Home">Accueil</a>
+        <a href="#profil" data-en="About me">À propos</a>
         <a href="#parcours" data-en="Education">Parcours</a>
         <a href="#projets" data-en="Projects">Projets</a>
         <a href="#competences" data-en="Skills">Compétences</a>
       </nav>
 
-      <button id="language" class="button secondary" type="button" lang="en">
+      <button id="langue" class="bouton secondaire" type="button" lang="en">
         English
       </button>
     </div>
   </header>
 
   <main>
-    <section id="accueil" class="hero">
-      <div class="wrap hero-grid">
+    <!-- 1. ACCUEIL -->
+    <section id="accueil" class="page accueil">
+      <div class="conteneur presentation">
         <div>
-          <p class="intro" data-en="Electrical Engineering and Industrial Computing student · IUT de Bordeaux">
+          <p class="formation" data-en="Electrical Engineering and Industrial Computing student · IUT de Bordeaux">
             Étudiant en BUT GEII · IUT de Bordeaux
           </p>
 
           <h1>Enzo Frejus</h1>
 
-          <p data-en="I’m interested in electronics, programming and automation. This portfolio presents projects I’ve worked on during my studies.">
-            Je m’intéresse à l’électronique, à la programmation et aux automatismes.
-            Ce portfolio présente les projets réalisés pendant ma formation.
+          <p data-en="I study electronics, programming and automation. This portfolio shows what I design and test during my first year at university.">
+            J’étudie l’électronique, la programmation et les automatismes.
+            Dans ce portfolio, je présente ce que je conçois et ce que je vérifie
+            au cours de ma première année de BUT.
           </p>
 
           <div class="actions">
-            <a class="button" href="#projets" data-en="View my projects">Voir mes projets</a>
-            <a class="button secondary" href="#profil" data-en="My profile">Mon profil</a>
+            <a class="bouton" href="#projets" data-en="View my projects">Voir mes projets</a>
+            <a class="bouton secondaire" href="#profil" data-en="About me">Mon profil</a>
           </div>
         </div>
 
-        <div class="avatar" aria-hidden="true">EF</div>
+        <div class="monogramme" aria-hidden="true">EF</div>
       </div>
     </section>
 
-    <div class="wrap">
-      <section id="projets" class="section">
-        <h2 data-en="My projects">Mes projets</h2>
+    <!-- 2. À PROPOS -->
+    <section id="profil" class="page rubrique conteneur" hidden>
+      <h1 data-en="About me">À propos</h1>
 
-        <div class="grid">
-          <article class="card">
-            <h3>Rafale</h3>
-            <p data-en="Team project about the Rafale.">Projet d’équipe autour du Rafale.</p>
-
-            <details>
-              <summary data-en="Project details">Démarche du projet</summary>
-              <ul>
-                <li data-en="Team role — Manager. Assigned tasks, coordinated the team and tracked progress.">
-                  Rôle dans l’équipe — Manager. Répartition des tâches, coordination du groupe et suivi de l’avancement.
-                </li>
-                <li data-en="Design — Help define requirements and choose technical solutions.">
-                  Concevoir — Participer à la définition du besoin et au choix des solutions techniques.
-                </li>
-                <li data-en="Verify — Check that the solution meets project requirements.">
-                  Vérifier — Contrôler la cohérence de la solution avec les exigences du projet.
-                </li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card">
-            <h3 data-en="Bath thermometer">Thermomètre de bain</h3>
-            <p data-en="Design of a circuit that indicates the water temperature range.">
-              Conception d’un circuit qui indique la plage de température de l’eau.
-            </p>
-
-            <details>
-              <summary data-en="Project details">Démarche du projet</summary>
-              <ul>
-                <li data-en="Team role — Manager. Organized tasks, coordinated team members and tracked the report.">
-                  Rôle dans l’équipe — Manager. Organisation du travail, coordination des membres et suivi du dossier.
-                </li>
-                <li data-en="Design — Size voltage dividers, set comparator thresholds and calculate LED resistor values.">
-                  Concevoir — Dimensionner les ponts diviseurs, définir les seuils des comparateurs et calculer les résistances des LED.
-                </li>
-                <li data-en="Verify — Check threshold voltages and LED behavior against the specifications.">
-                  Vérifier — Contrôler les tensions de seuil et le fonctionnement des LED par rapport au cahier des charges.
-                </li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card">
-            <h3 data-en="Operational amplifiers">AOP</h3>
-            <p data-en="Study of operational amplifier circuits.">
-              Étude de montages à amplificateur opérationnel.
-            </p>
-
-            <details>
-              <summary data-en="Project details">Démarche du projet</summary>
-              <ul>
-                <li data-en="Analyze how a voltage follower and a comparator work.">
-                  Analyser le fonctionnement d’un suiveur et d’un comparateur.
-                </li>
-                <li data-en="Compare calculated voltages with simulation or measurement results.">
-                  Comparer les tensions calculées avec les résultats de simulation ou de mesure.
-                </li>
-              </ul>
-            </details>
-          </article>
-
-          <article class="card">
-            <h3 data-en="Entrepreneurship">Entrepreneuriat</h3>
-            <p data-en="Business project for a machine that converts pedaling into electrical energy.">
-              Étude d’un projet de machine qui transforme le pédalage en énergie électrique.
-            </p>
-
-            <details>
-              <summary data-en="Project details">Démarche du projet</summary>
-              <ul>
-                <li data-en="Present the energy conversion chain, from the pedals to the LiFePO₄ battery with a built-in battery management system.">
-                  Présenter la chaîne d’énergie, du pédalier à la batterie LiFePO₄ équipée d’un BMS intégré.
-                </li>
-                <li data-en="Identify potential customers and partners and plan how to present the product.">
-                  Identifier les clients et partenaires potentiels et préparer la présentation du produit.
-                </li>
-              </ul>
-            </details>
-          </article>
-        </div>
-      </section>
-
-      <section id="profil" class="section">
-        <h2 data-en="About me">À propos</h2>
-        <p data-en="I’m a first-year student in Electrical Engineering and Industrial Computing at IUT de Bordeaux, on the Gradignan campus. I’m learning to design circuits, verify their operation and organize teamwork.">
-          Je suis en première année de BUT Génie électrique et informatique industrielle
-          à l’IUT de Bordeaux, sur le campus de Gradignan. J’apprends à concevoir des
-          circuits, à vérifier leur fonctionnement et à organiser le travail en équipe.
+      <div class="lecture">
+        <p data-en="I’m Enzo Frejus, a first-year Electrical Engineering and Industrial Computing student at IUT de Bordeaux, on the Gradignan campus.">
+          Je m’appelle Enzo Frejus et je suis en première année de BUT
+          Génie électrique et informatique industrielle à l’IUT de Bordeaux,
+          sur le campus de Gradignan.
         </p>
-      </section>
 
-      <section id="parcours" class="section">
-        <h2 data-en="My education">Mon parcours</h2>
+        <p data-en="In electronics, I learn how to go from a circuit diagram to a working system. For my bath thermometer project, this meant calculating switching thresholds and checking which LED would light up for each temperature range.">
+          En électronique, j’apprends à passer d’un schéma à un montage qui répond
+          à un besoin précis. Pour le thermomètre de bain, par exemple, j’ai travaillé
+          sur les seuils de commutation pour déterminer quelle LED devait s’allumer
+          selon la température de l’eau.
+        </p>
 
-        <div class="timeline">
-          <h3 data-en="Current · Electrical Engineering and Industrial Computing">Aujourd’hui · BUT GEII</h3>
-          <p data-en="First year at IUT de Bordeaux. Electronics, automation and programming.">
-            Première année à l’IUT de Bordeaux. Électronique, automatisme et programmation.
+        <a class="bouton secondaire bouton" href="#projets" data-en="Explore my projects">
+          Découvrir mes projets
+        </a>
+      </div>
+    </section>
+
+    <!-- 3. PARCOURS -->
+    <section id="parcours" class="page rubrique conteneur" hidden>
+      <h1 data-en="My education">Mon parcours</h1>
+
+      <div class="chronologie">
+        <article>
+          <h2 data-en="First year · Electrical Engineering and Industrial Computing">
+            Première année · BUT GEII
+          </h2>
+          <p data-en="IUT de Bordeaux, Gradignan campus. I study analog electronics, combinational logic, automation and Arduino programming.">
+            IUT de Bordeaux, campus de Gradignan. J’y étudie l’électronique
+            analogique, la logique combinatoire, les automatismes et la
+            programmation sur Arduino.
+          </p>
+        </article>
+
+        <article>
+          <h2 data-en="Before university · General baccalaureate">
+            Avant le BUT · Baccalauréat général
+          </h2>
+          <p data-en="In my final year of secondary school, I studied mathematics, physics and chemistry. My oral exam topics covered the number π and Newton’s law of cooling.">
+            En terminale, j’ai étudié les mathématiques et la physique-chimie.
+            Pour le Grand Oral, j’ai travaillé sur le nombre π et sur la loi
+            de refroidissement de Newton.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. PROJETS -->
+    <section id="projets" class="page rubrique conteneur" hidden>
+      <h1 data-en="My projects">Mes projets</h1>
+
+      <div class="grille">
+        <article class="carte">
+          <h2 data-en="Bath thermometer">Thermomètre de bain</h2>
+
+          <p data-en="Design an electronic circuit that indicates the water temperature range using LEDs.">
+            Concevoir un circuit électronique qui indique la plage de température
+            de l’eau à l’aide de LED.
           </p>
 
-          <h3 data-en="Before university · General baccalaureate">Avant le BUT · Baccalauréat général</h3>
-          <p data-en="Mathematics, physics and chemistry.">Mathématiques et physique-chimie.</p>
-        </div>
-      </section>
-
-      <section id="competences" class="section">
-        <h2 data-en="Skills and software">Compétences et logiciels</h2>
-
-        <div class="grid tools">
-          <article class="card">
-            <h3 data-en="Electronics and schematics">Électronique et schémas</h3>
-            <ul class="tags">
-              <li>Proteus</li>
-              <li>ISIS</li>
-              <li>ARES</li>
-              <li>WinRelais</li>
+          <details>
+            <summary data-en="Project details">Démarche du projet</summary>
+            <ul>
+              <li data-en="Coordinate the team and track progress on the design report.">
+                Coordonner l’équipe et suivre l’avancement du dossier de conception.
+              </li>
+              <li data-en="Size the voltage dividers, set the comparator thresholds and calculate the LED resistors.">
+                Dimensionner les ponts diviseurs, définir les seuils des comparateurs
+                et calculer les résistances des LED.
+              </li>
+              <li data-en="Check the threshold voltages and LED behavior against the specifications.">
+                Vérifier les tensions de seuil et l’allumage des LED par rapport
+                au cahier des charges.
+              </li>
             </ul>
-          </article>
+          </details>
+        </article>
 
-          <article class="card">
-            <h3 data-en="Automation and programming">Automatisme et programmation</h3>
-            <ul class="tags">
-              <li>TIA Portal</li>
-              <li>Arduino</li>
-            </ul>
-          </article>
+        <article class="carte">
+          <h2 data-en="Pedal-powered generator">Machine à pédalage</h2>
 
-          <article class="card">
-            <h3 data-en="Calculation and presentation">Calcul et présentation</h3>
-            <ul class="tags">
-              <li>Maple</li>
-              <li>Excel</li>
-              <li>Canva</li>
+          <p data-en="Study how a fitness machine could use the energy produced by pedaling to charge a smartphone.">
+            Étudier comment une machine de sport pourrait utiliser l’énergie
+            du pédalage pour recharger un smartphone.
+          </p>
+
+          <details>
+            <summary data-en="Project details">Démarche du projet</summary>
+            <ul>
+              <li data-en="Trace the motion from the pedals through the chain and flywheel to the alternator.">
+                Décrire la transmission du mouvement entre le pédalier, la chaîne,
+                le volant d’inertie et l’alternateur.
+              </li>
+              <li data-en="Explain how the electronics rectify the output and regulate the voltage before storing energy in a LiFePO₄ battery with a built-in battery management system.">
+                Expliquer le redressement et la régulation avant le stockage dans
+                une batterie LiFePO₄ équipée d’un BMS intégré.
+              </li>
+              <li data-en="Identify potential customers and partners for the business project.">
+                Identifier les clients et les partenaires potentiels dans le cadre
+                du projet d’entrepreneuriat.
+              </li>
             </ul>
-          </article>
-        </div>
-      </section>
-    </div>
+          </details>
+        </article>
+
+        <article class="carte">
+          <h2 data-en="Operational amplifiers">Amplificateurs opérationnels</h2>
+
+          <p data-en="Study how the same component behaves in a voltage follower circuit and a comparator circuit.">
+            Étudier le comportement d’un AOP dans deux montages, le suiveur
+            de tension et le comparateur.
+          </p>
+
+          <details>
+            <summary data-en="Project details">Démarche du projet</summary>
+            <ul>
+              <li data-en="Identify the inverting and non-inverting inputs on the circuit diagram.">
+                Repérer les entrées inverseuse et non-inverseuse sur le schéma.
+              </li>
+              <li data-en="Predict the output voltage, then compare the calculation with a simulation or measurement.">
+                Prévoir la tension de sortie, puis comparer le calcul avec une
+                simulation ou une mesure.
+              </li>
+            </ul>
+          </details>
+        </article>
+
+        <article class="carte">
+          <h2>Rafale</h2>
+
+          <p data-en="Team project in which I coordinated tasks and tracked the group’s progress.">
+            Projet d’équipe dans lequel j’ai assuré la répartition des tâches
+            et le suivi de l’avancement du groupe.
+          </p>
+
+          <details>
+            <summary data-en="Project details">Démarche du projet</summary>
+            <ul>
+              <li data-en="Organize the team’s work and track each member’s contributions.">
+                Organiser le travail de l’équipe et suivre les contributions de chacun.
+              </li>
+              <li data-en="Help define the requirements and check the proposed solution against them.">
+                Participer à la définition du besoin et vérifier que la solution
+                proposée répond aux exigences du projet.
+              </li>
+            </ul>
+          </details>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. COMPÉTENCES -->
+    <section id="competences" class="page rubrique conteneur" hidden>
+      <h1 data-en="Skills and software">Compétences et logiciels</h1>
+
+      <div class="grille outils">
+        <article class="carte">
+          <h2 data-en="Electronics and schematics">Électronique et schémas</h2>
+          <p data-en="Read a circuit diagram, size components and compare calculated voltages with a simulation.">
+            Lire un schéma, dimensionner des composants et comparer les tensions
+            calculées avec une simulation.
+          </p>
+          <ul class="etiquettes">
+            <li>Proteus</li>
+            <li>ISIS</li>
+            <li>ARES</li>
+            <li>WinRelais</li>
+          </ul>
+        </article>
+
+        <article class="carte">
+          <h2 data-en="Automation and programming">Automatisme et programmation</h2>
+          <p data-en="Read a potentiometer value, control digital outputs and set the duty cycle of a PWM signal.">
+            Lire la valeur d’un potentiomètre, commander des sorties numériques
+            et régler le rapport cyclique d’un signal PWM.
+          </p>
+          <ul class="etiquettes">
+            <li>Arduino</li>
+            <li>TIA Portal</li>
+          </ul>
+        </article>
+
+        <article class="carte">
+          <h2 data-en="Calculation and presentation">Calcul et présentation</h2>
+          <p data-en="Organize results in a table and present the design process in a technical report or slide deck.">
+            Organiser des résultats dans un tableau et présenter la démarche
+            de conception dans un dossier technique ou un diaporama.
+          </p>
+          <ul class="etiquettes">
+            <li>Maple</li>
+            <li>Excel</li>
+            <li>Canva</li>
+          </ul>
+        </article>
+      </div>
+    </section>
   </main>
 
-  <footer class="wrap">Enzo Frejus · Portfolio GEII</footer>
+  <footer>
+    <div class="conteneur">Enzo Frejus · Portfolio GEII</div>
+  </footer>
 
   <script>
-    const boutonLangue = document.querySelector("#language");
+    const pages = [...document.querySelectorAll("main > .page")];
     const navigation = document.querySelector("nav");
+    const liensMenu = [...navigation.querySelectorAll("a")];
+    const boutonLangue = document.querySelector("#langue");
     const textes = document.querySelectorAll("[data-en]");
 
-    // Mémorise le texte français avant le premier changement de langue.
+    // Conserve les textes français pour pouvoir revenir du mode anglais.
     for (const element of textes) {
       element.dataset.fr = element.textContent.trim();
     }
 
-    boutonLangue.addEventListener("click", () => {
-      const anglais = document.documentElement.lang === "fr";
-      const langue = anglais ? "en" : "fr";
+    function afficherPage(deplacerFocus = false) {
+      // Exemple : index.html#projets ouvre directement la vue Projets.
+      const identifiant = window.location.hash.slice(1);
+      const pageActive = pages.find(page => page.id === identifiant) || pages[0];
 
+      for (const page of pages) {
+        page.hidden = page !== pageActive;
+      }
+
+      for (const lien of liensMenu) {
+        if (lien.hash === "#" + pageActive.id) {
+          lien.setAttribute("aria-current", "page");
+          document.title = lien.textContent.trim() + " | Enzo Frejus";
+        } else {
+          lien.removeAttribute("aria-current");
+        }
+      }
+
+      if (deplacerFocus) {
+        const titre = pageActive.querySelector("h1");
+        titre.tabIndex = -1;
+        titre.focus({ preventScroll: true });
+      }
+
+      window.scrollTo(0, 0);
+    }
+
+    // Gère les clics du menu et les boutons Retour / Suivant du navigateur.
+    window.addEventListener("hashchange", () => afficherPage(true));
+
+    boutonLangue.addEventListener("click", () => {
+      const langue = document.documentElement.lang === "fr" ? "en" : "fr";
       document.documentElement.lang = langue;
 
       for (const element of textes) {
         element.textContent = element.dataset[langue];
       }
 
+      const enAnglais = langue === "en";
       navigation.setAttribute(
         "aria-label",
-        anglais ? "Main navigation" : "Navigation principale"
+        enAnglais ? "Main navigation" : "Navigation principale"
       );
+      boutonLangue.textContent = enAnglais ? "Français" : "English";
+      boutonLangue.lang = enAnglais ? "fr" : "en";
 
-      boutonLangue.lang = anglais ? "fr" : "en";
-      boutonLangue.textContent = anglais ? "Français" : "English";
+      afficherPage();
     });
+
+    // Affiche l’accueil ou la page indiquée dans l’adresse dès l’ouverture.
+    afficherPage();
   </script>
 </body>
 </html>
